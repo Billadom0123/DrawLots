@@ -29,3 +29,6 @@ mybatis-plus:
   configuration:
     # 设置将下划线分割法自动映射为驼峰分割法
     map-underscore-to-camel-case: true
+
+server:
+  port: 8080
