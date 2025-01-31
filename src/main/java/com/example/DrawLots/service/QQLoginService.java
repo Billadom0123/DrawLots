@@ -46,9 +46,9 @@ public class QQLoginService
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(tokenUrl)
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", code)  // 使用收到的 code
-                .queryParam("redirect_uri", redirectUri)  // 必须与你注册的回调地址一致
-                .queryParam("client_id", clientId)  // 你的应用appid
-                .queryParam("client_secret", clientSecret);  // 你的应用app密钥
+                .queryParam("redirect_uri", redirectUri)  // 必须与注册的回调地址一致
+                .queryParam("client_id", clientId)  // 应用appid
+                .queryParam("client_secret", clientSecret);  // 应用app密钥
 
         // 发起GET请求，获取Access Token
         ResponseEntity<String> response = restTemplate.getForEntity(builder.toUriString(), String.class);
