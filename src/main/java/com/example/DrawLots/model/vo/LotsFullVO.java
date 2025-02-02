@@ -1,16 +1,15 @@
 package com.example.DrawLots.model.vo;
 
+import com.example.DrawLots.model.po.Lotresult;
 import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.po.Prize;
 import lombok.Getter;
-import lombok.ToString;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
-@ToString
-public class LotsVO {
+public class LotsFullVO {
     private int id;
     private int uid;
     private String nickname;
@@ -24,8 +23,9 @@ public class LotsVO {
     private int choice;
     private int[] randomRange;
     private int randomNumber;
+    private List<Lotresult> results;
 
-    public LotsVO(Lots lots) {
+    public LotsFullVO(Lots lots) {
         this.id = lots.getId();
         this.uid = lots.getUid();
         this.nickname = lots.getNickname();
@@ -39,5 +39,6 @@ public class LotsVO {
         this.choice = lots.getChoice();
         this.randomRange = new int[] {lots.getRandomRangeMin(),lots.getRandomRangeMax()};
         this.randomNumber = lots.getRandomNumber();
+        this.results = lots.getResults();
     }
 }
