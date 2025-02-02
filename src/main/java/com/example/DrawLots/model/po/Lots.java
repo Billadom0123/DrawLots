@@ -3,10 +3,8 @@ package com.example.DrawLots.model.po;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +13,7 @@ public class Lots {
     private int id;
     private int uid;
     private String nickname;
-    private List<Prize> prizes;
+    private String prizes;
     private int type;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -26,5 +24,4 @@ public class Lots {
     private int randomRangeMin;
     private int randomRangeMax;
     private int randomNumber;
-    private List<Lotresult> results;
 }
