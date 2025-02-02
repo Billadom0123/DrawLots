@@ -62,8 +62,8 @@ public class QQLoginService
 
         // 从查询参数中提取各个参数
         String accessToken = queryParams.getFirst("access_token");
-        String expiresIn = queryParams.getFirst("expires_in");//可用于功能改进，避免用户每隔60天都要重新授权。但是我先不改
-        String refreshToken = queryParams.getFirst("refresh_token");//可用于功能改进，避免用户每隔60天都要重新授权。但是我先不改
+        String expiresIn = queryParams.getFirst("expires_in");//可用于功能改进，避免用户每隔60天都要重新授权。
+        String refreshToken = queryParams.getFirst("refresh_token");//可用于功能改进，避免用户每隔60天都要重新授权。
 
         if(accessToken != null) {
             return accessToken;  // 返回 Access Token

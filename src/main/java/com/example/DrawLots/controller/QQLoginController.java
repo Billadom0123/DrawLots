@@ -14,7 +14,7 @@ public class QQLoginController
     }
 
     // 步骤1: 获取Authorization Code的URL
-    @GetMapping("/auth/getAuthUrl")
+    @GetMapping("/QQauth/getAuthUrl")
     public String getAuthUrl() {
         String clientId = "";  // 实际的client_id。即申请QQ登录成功后，分配给应用的appid。
         String redirectUri = "";  // 实际的redirect_uri
@@ -26,7 +26,7 @@ public class QQLoginController
 
     // 合并后的接口，直接根据Authorization Code的URL返回 access_token 和 openid。
     // 填写变量时，可参考上方注释部分。
-    @GetMapping("/auth/login")
+    @GetMapping("/QQauth/login")
     public String loginByAuthUrl(@RequestParam String code, @RequestParam String state) {
         if(state.equals("Web request remain stable")) {
             String clientId = "";  // 实际的client_id。即申请QQ登录成功后，分配给应用的appid。
