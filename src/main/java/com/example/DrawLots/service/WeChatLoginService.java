@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.util.UriUtils;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class WeChatLoginService
@@ -24,8 +27,10 @@ public class WeChatLoginService
         String url = String.format("%s?appid=%s&secret=%s&code=%s&grant_type=authorization_code",
                 tokenUrl, appId, appSecret, code);
 
+        String encodedUrl = UriUtils.encode(url, StandardCharsets.UTF_8);
+
         // 返回的json会自动转化为WeChatLoginResponse对象
-        ResponseEntity<WeChatLoginResponse> response = restTemplate.getForEntity(url, WeChatLoginResponse.class);
+        ResponseEntity<WeChatLoginResponse> response = restTemplate.getForEntity(encodedUrl, WeChatLoginResponse.class);
 
         return parseResponse(response.getBody());
     }
@@ -52,7 +57,8 @@ public class WeChatLoginService
         String appId="wxca3387499a3b8185";
         String url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appId+"&grant_type=refresh_token&refresh_token="+refreshToken;
 
-        ResponseEntity<WeChatLoginResponse> response = restTemplate.getForEntity(url, WeChatLoginResponse.class);
+        String encodedUrl = UriUtils.encode(url, StandardCharsets.UTF_8);
+        ResponseEntity<WeChatLoginResponse> response = restTemplate.getForEntity(encodedUrl, WeChatLoginResponse.class);
 
         return parseRefreshResponse(response.getBody()); // 返回更新后的WeChatAccessTokenResponse对象
     }
