@@ -29,7 +29,6 @@ public class LotsVO {
         this.id = lots.getId();
         this.uid = lots.getUid();
         this.nickname = lots.getNickname();
-        this.prizes = lots.getPrizes();
         this.type = lots.getType();
         this.startTime = lots.getStartTime();
         this.endTime = lots.getEndTime();

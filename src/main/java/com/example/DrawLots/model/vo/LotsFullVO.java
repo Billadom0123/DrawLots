@@ -13,7 +13,6 @@ public class LotsFullVO {
     private int id;
     private int uid;
     private String nickname;
-    private List<Prize> prizes;
     private int type;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -23,13 +22,11 @@ public class LotsFullVO {
     private int choice;
     private int[] randomRange;
     private int randomNumber;
-    private List<Lotresult> results;
 
     public LotsFullVO(Lots lots) {
         this.id = lots.getId();
         this.uid = lots.getUid();
         this.nickname = lots.getNickname();
-        this.prizes = lots.getPrizes();
         this.type = lots.getType();
         this.startTime = lots.getStartTime();
         this.endTime = lots.getEndTime();
@@ -39,6 +36,5 @@ public class LotsFullVO {
         this.choice = lots.getChoice();
         this.randomRange = new int[] {lots.getRandomRangeMin(),lots.getRandomRangeMax()};
         this.randomNumber = lots.getRandomNumber();
-        this.results = lots.getResults();
     }
 }

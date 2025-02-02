@@ -18,6 +18,9 @@ public class DrawLotsService {
 
     public Response getLotsInfo(Integer id) {
         Lots lots = lotsMapper.getLotsById(id);
+        if (lots == null) {
+            return Response.failure(500,"dont find any");
+        }
         return Response.success(new LotsVO(lots));
     }
 

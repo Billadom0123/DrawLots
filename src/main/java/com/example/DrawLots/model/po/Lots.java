@@ -15,7 +15,6 @@ public class Lots {
     private int id;
     private int uid;
     private String nickname;
-    private List<Prize> prizes;
     private int type;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -26,5 +25,4 @@ public class Lots {
     private int randomRangeMin;
     private int randomRangeMax;
     private int randomNumber;
-    private List<Lotresult> results;
 }

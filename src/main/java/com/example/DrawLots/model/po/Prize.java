@@ -10,9 +10,10 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Prize {
+    private int lotsId;
     private String type;
     private String name;
     private int number;
-    private String picture;
+    private String pictureUrl;
     private String description;
 }
