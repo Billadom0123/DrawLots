@@ -35,7 +35,8 @@ public class WeChatLoginService
         return parseResponse(response.getBody());
     }
 
-    public String parseResponse(WeChatLoginResponse response) {
+    public String parseResponse(WeChatLoginResponse response)
+    {
         // 提取各个参数
         String accessToken = response.getAccess_token();
         int expiresIn = response.getExpires_in();
@@ -44,7 +45,8 @@ public class WeChatLoginService
         String scope = response.getScope();
         String unionid = response.getUnionid();
 
-        if(accessToken != null&&unionid!=null) {
+        if(accessToken != null&&unionid!=null)
+        {
             return "accessToken:"+accessToken+"&&refreshToken:"+refreshToken+"&&openid:"+openId;
         }
         else {
@@ -53,7 +55,8 @@ public class WeChatLoginService
     }
 
     //刷新access_token
-    public String refreshAccessToken(String refreshToken) {
+    public String refreshAccessToken(String refreshToken)
+    {
         String appId="wxca3387499a3b8185";
         String url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+appId+"&grant_type=refresh_token&refresh_token="+refreshToken;
 
@@ -63,7 +66,8 @@ public class WeChatLoginService
         return parseRefreshResponse(response.getBody()); // 返回更新后的WeChatAccessTokenResponse对象
     }
 
-    public String parseRefreshResponse(WeChatLoginResponse response) {
+    public String parseRefreshResponse(WeChatLoginResponse response)
+    {
         // 提取各个参数
         String accessToken = response.getAccess_token();
         int expiresIn = response.getExpires_in();
@@ -71,7 +75,8 @@ public class WeChatLoginService
         String openId = response.getOpenid();
         String scope = response.getScope();
 
-        if(accessToken != null) {
+        if(accessToken != null)
+        {
             return "accessToken:"+accessToken+"&&refreshToken:"+refreshToken+"&&openid:"+openId;
         }
         else {

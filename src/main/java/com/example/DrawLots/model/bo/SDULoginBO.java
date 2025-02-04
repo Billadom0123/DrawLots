@@ -16,7 +16,7 @@ public class SDULoginBO {
 
     private String password;  //统一认证密码
 
-    //检查uid是否正确填写
+    //检查sid是否正确填写
     @SuppressWarnings("unused")
     public void setSid(String sid) {
         if (CheckFormatUtil.checkSid(sid)) {
