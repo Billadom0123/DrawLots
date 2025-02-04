@@ -19,8 +19,8 @@ public class WeChatLoginController
 
     //步骤1: 获取Authorization Code的URL
     //在微信登录中，这一步由前端完成。具体做法:
-    //前端生成二维码引入链接，或者让用户点击链接： https://open.weixin.qq.com/connect/qrconnect?appid=wxca3387499a3b8185&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_login&state=Web request remain stable#wechat_redirect
-    //并且请注意，redirect_uric参数未填写。它应该填网站应用申请微信登录审核时填写的授权域名
+    //前端生成二维码引入链接，或者让用户点击链接： https://open.weixin.qq.com/connect/qrconnect?appid=wxca3387499a3b8185&redirect_uri=http://drawlots.billadom.top/wxMpSendMsgCallBack&response_type=code&scope=snsapi_login&state=Web request remain stable#wechat_redirect
+
 
 
     //后续步骤:

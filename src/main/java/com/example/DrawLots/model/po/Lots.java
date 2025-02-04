@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Lots {
+public class Lots {//已发布的抽奖
     private int id;
     private int uid;
     private String nickname;
