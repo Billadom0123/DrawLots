@@ -1,4 +1,6 @@
 package com.example.DrawLots.controller;
 
-public class SearchLotsController {
+public class SearchLotsController
+{
+
 }

@@ -16,14 +16,22 @@ public class DrawLotsController {
     private DrawLotsService drawLotsService;
 
     @GetMapping("/lots/info")
-    public Response getLotsInfo(@RequestParam("id") Integer id) {
+    public Response getLotsInfo(@RequestParam("id") Integer id)
+    {
         return drawLotsService.getLotsInfo(id);
     }
 
     @PostMapping("/lots/join")
     public Response joinLots(@RequestParam("id") Integer id,
-                             @RequestParam("uid") Integer uid) {
+                             @RequestParam("uid") Integer uid)
+    {
         return drawLotsService.joinLots(id,uid);
     }
 
+    //给id这次抽奖开奖
+    @GetMapping("/lots/finish")
+    public Response finishLots(@RequestParam("id") Integer id)
+    {
+
+    }
 }
