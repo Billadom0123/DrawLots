@@ -21,7 +21,7 @@ public class MethodImplement implements SDULoginBO.Method
     public User register(User newUser)
     {
         userMapper.addNewSDUUser(newUser);
-        return newUser;
+        return userMapper.getUserBySid(newUser.getSid());
     }
 
 }

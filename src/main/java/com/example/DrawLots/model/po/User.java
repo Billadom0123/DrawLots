@@ -18,6 +18,8 @@ public class User {
     private String face;// 头像
     private String password;// 密码
 
+    private String unionid;//微信用户的唯一id
+
 
     public User(String sid, String name, String password) // sdu用户
     {

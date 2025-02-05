@@ -12,9 +12,13 @@ public interface UserMapper {
     @Insert("INSERT INTO `user`(`sid`,`name`,`password`) VALUES(#{sid},#{name},#{password})")
     void addNewSDUUser(User user);
 
-    //新增一条qq_user或者是wechat_user记录
+    //新增一条qq_user记录
     @Insert("INSERT INTO `user`(`nickname`,`face`) VALUES(#{nickname},#{face})")
-    void addNewQQOrWeChatUser(User user);
+    void addNewQQUser(User user);
+
+    //新增一条wechat_user记录
+    @Insert("INSERT INTO `user`(`nickname`,`face`,`unionid`) VALUES(#{nickname},#{face},#{unionid})")
+    void addNewWeChatUser(User user);
 
     //按uid查找对应用户
     @Select("SELECT * FROM `user` WHERE `uid`=#{uid}")
@@ -32,6 +36,10 @@ public interface UserMapper {
     @Select("SELECT * FROM `user`")
     List<User> getAllUser();
 
+    //按unionid查找对应的微信用户
+    @Select("SELECT * FROM `user` WHERE `unionid`=#{unionid}")
+    User getUserByUnionid(String unionid);
+
     //更新用户昵称
     @Update("UPDATE `user` SET `nickname`=#{nickname} WHERE `uid`=#{uid}")
     void updateNickname(String nickname, Integer uid);
@@ -39,6 +47,10 @@ public interface UserMapper {
     //判断昵称是否存在
     @Select("SELECT EXISTS(SELECT 1 FROM `user` WHERE `nickname`=#{nickname})")
     boolean judgeExistsOfNickname(String nickname);
+
+    //判断unionid是否存在(微信用户唯一标识)
+    @Select("SELECT EXISTS(SELECT 1 FROM `user` WHERE `unionid`=#{unionid})")
+    boolean judgeExistsOfUnionid(String unionid);
 
     //更新用户头像
     @Update("UPDATE `user` SET `face`=#{face} WHERE `uid`=#{uid}")

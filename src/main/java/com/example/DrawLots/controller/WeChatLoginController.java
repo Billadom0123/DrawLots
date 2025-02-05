@@ -1,5 +1,6 @@
 package com.example.DrawLots.controller;
 
+import com.example.DrawLots.model.po.User;
 import com.example.DrawLots.service.QQLoginService;
 import com.example.DrawLots.service.WeChatLoginService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WeChatLoginController
 {
-    private final QQLoginService qQLoginService;
     private final WeChatLoginService weChatLoginService;
-    public WeChatLoginController(QQLoginService qQLoginService, WeChatLoginService weChatLoginService)
+    public WeChatLoginController(WeChatLoginService weChatLoginService)
     {
         this.weChatLoginService=weChatLoginService;
-        this.qQLoginService = qQLoginService;
     }
 
     //步骤1: 获取Authorization Code的URL
@@ -26,14 +25,14 @@ public class WeChatLoginController
     //后续步骤:
     //请注意:执行这个接口时，要填入参数code和state，这两个其实就是步骤一的返回结果。
     @GetMapping("/WeChatauth/login")
-    public String loginByAuthUrl(@RequestParam String code, @RequestParam String state)
+    public User loginByAuthUrl(@RequestParam String code, @RequestParam String state)
     {
         if(state.equals("Web request remain stable"))
         {
-            return weChatLoginService.getAccessTokenAndOpenId(code);
+            return weChatLoginService.login(code);
         }
         else{
-            return "State Error";
+            return null;
         }
     }
 }

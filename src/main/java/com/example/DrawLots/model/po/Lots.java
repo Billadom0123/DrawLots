@@ -25,4 +25,7 @@ public class Lots {//已发布的抽奖
     private int randomRangeMin;
     private int randomRangeMax;
     private int randomNumber;
+
+    private String textNotice;
+    private String imageNotice;
 }
