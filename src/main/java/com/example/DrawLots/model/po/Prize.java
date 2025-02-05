@@ -10,6 +10,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Prize {
+
+    private int id;
+
     private int lotsId;
 
     private String type;//奖项
@@ -19,5 +22,7 @@ public class Prize {
     private int number;//该奖项有几个人中奖
 
     private String pictureUrl;
+
     private String description;
+
 }

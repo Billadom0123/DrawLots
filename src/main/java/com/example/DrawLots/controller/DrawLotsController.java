@@ -28,10 +28,4 @@ public class DrawLotsController {
         return drawLotsService.joinLots(id,uid);
     }
 
-    //给id这次抽奖开奖
-    @GetMapping("/lots/finish")
-    public Response finishLots(@RequestParam("id") Integer id)
-    {
-
-    }
 }

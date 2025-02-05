@@ -7,12 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 @Mapper
 public interface PrizeMapper
 {
     //按照lots_id查询
     @Select("SELECT * FROM `prizes` WHERE `lots_id`=#{lotsId}")
-    Prize getPrizeByLotsId(int lotsId);
+    List<Prize> getPrizeByLotsId(int lotsId);
 
     //按照lots_id和type查询
     @Select("SELECT * FROM `prizes` WHERE `lots_id` = #{lotsId} AND `type` = #{type}")

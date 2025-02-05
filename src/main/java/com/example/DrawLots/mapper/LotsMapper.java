@@ -4,12 +4,18 @@ import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.po.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface LotsMapper {
 
     //按照id查询lots
     @Select("SELECT * FROM `lots` WHERE `id`=#{id}")
     Lots getLotsById(int id);
+
+    //返回uid创建的所有抽奖
+    @Select("SELECT * FROM `lots` WHERE `uid` = #{uid}")
+    List<Lots> getLotsByUid(Integer uid);
 
     //创造一个lots,uid表示发布者
     @Insert("INSERT INTO `lots`(`uid`,`nickname`,`type`,`start_time`," +

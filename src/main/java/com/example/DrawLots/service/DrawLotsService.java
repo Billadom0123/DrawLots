@@ -1,19 +1,23 @@
 package com.example.DrawLots.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.DrawLots.mapper.LotresultMapper;
 import com.example.DrawLots.mapper.LotsMapper;
 import com.example.DrawLots.mapper.PrizeMapper;
 import com.example.DrawLots.mapper.UserMapper;
 import com.example.DrawLots.model.po.Lotresult;
 import com.example.DrawLots.model.po.Lots;
-import com.example.DrawLots.model.vo.LotsVO;
+import com.example.DrawLots.model.po.Prize;
+import com.example.DrawLots.model.vo.PrizeVO;
 import com.example.DrawLots.model.vo.Response;
 import com.example.DrawLots.util.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DrawLotsService {
@@ -32,7 +36,53 @@ public class DrawLotsService {
         if (lots == null) {
             return Response.failure(500,"dont find any");
         }
-        return Response.success(new LotsVO(lots));
+
+        //直接创建json形式的LotsVO，参考接口文档
+        JSONObject LotsVO = new JSONObject();
+
+
+        JSONObject userJO = new JSONObject();
+        userJO.put("uid", lots.getUid());
+        userJO.put("nickname", lots.getNickname());
+        LotsVO.put("user", userJO);
+
+
+        List<Prize> prizes = prizeMapper.getPrizeByLotsId(lots.getId());
+        ArrayList<PrizeVO> prizeVOs= new ArrayList<>();
+        for (Prize prize : prizes) {
+            prizeVOs.add(new PrizeVO(prize));
+        }
+        JSONArray prizesJA = JSONArray.parseArray(JSONObject.toJSONString(prizeVOs));
+        LotsVO.put("prizes", prizesJA);
+
+
+        JSONObject infoVO = new JSONObject();
+        infoVO.put("type", lots.getType());
+
+        JSONObject time = new JSONObject();
+        time.put("start", lots.getStartTime());
+        time.put("end", lots.getEndTime());
+        infoVO.put("time", time);
+
+        JSONObject join = new JSONObject();
+        join.put("number",lots.getJoinLimit());
+        join.put("method",lots.getJoinMethod());
+        infoVO.put("join", join);
+
+        infoVO.put("choice",lots.getChoice());
+
+        JSONObject random = new JSONObject();
+        random.put("range",JSONArray.parseArray(JSONObject.toJSONString(new int[]{lots.getRandomRangeMin(),lots.getRandomRangeMax()})));
+        random.put("number",lots.getRandomNumber());
+
+        random.put("text_notice",lots.getTextNotice());
+        random.put("image_notice",lots.getImageNotice());
+        infoVO.put("random", random);
+
+        LotsVO.put("info", infoVO);
+
+
+        return Response.success(JSONObject.toJSONString(LotsVO));
     }
 
     public Response joinLots(Integer id,Integer uid) {
@@ -61,7 +111,7 @@ public class DrawLotsService {
 
         }*/
 
-        return Response.success(new LotsVO(lots));
+        return Response.success("Successfully joined");
     }
 
     public Response getLotsResult(Integer lotId) //为lotsId这次抽奖开奖，并获取开奖结果,这里是通用抽奖
