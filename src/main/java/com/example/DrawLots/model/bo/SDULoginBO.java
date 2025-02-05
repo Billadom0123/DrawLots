@@ -8,12 +8,12 @@ import kong.unirest.Unirest;
 import lombok.NoArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Service;
 
 /* author: koishikiss */
 @NoArgsConstructor
 public class SDULoginBO {
     private String sid;  //统一认证学号
-
     private String password;  //统一认证密码
 
     //检查sid是否正确填写
