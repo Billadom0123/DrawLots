@@ -1,26 +1,28 @@
 package com.example.DrawLots.mapper;
 
 import com.example.DrawLots.model.po.Lotresult;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface LotresultMapper
 {
 
-    //按照id查询Lotresult
-    @Select("SELECT * FROM `results` WHERE `id`=#{id}")
-    Lotresult getLotresultByLotsId(int lotsId);
+    //按照lotsId和uid查询Lotresult
+    @Select("SELECT * FROM `results` WHERE `lots_id` = #{lotsId} AND `uid` = #{uid}")
+    Lotresult getLotresultByLotsIdAndUid(Integer lotsId, Integer uid);
 
-    //为uid这个用户的lots_id这次抽奖开奖，记录下抽奖结果Lotresult
-    @Insert("INSERT INTO `results`(`lots_id`,`uid`,`nickname`,`join_time`,`prize_id`) VALUES(#{lotsId},#{uid},#{nickname},#{time},#{endTime},#{prize.number})")
+
+    //为uid这个用户的lots_id这次抽奖记录下抽奖结果Lotresult,注意此时并没有开奖,设置prize_id为0
+    @Insert("INSERT INTO `results`(`lots_id`,`uid`,`nickname`,`join_time`,`prize_id`) VALUES(#{lotsId},#{uid},#{nickname},#{time},0)")
     void addNewLotresult(Lotresult lotresult);
 
-    //查询数据库中发布的抽奖数量
-    @Select("SELECT COUNT(1) FROM `results`")
-    int getLotresultNum();
+    //返回所有参与了这次抽奖的uid
+    @Select("SELECT `uid` FROM `results` WHERE `lots_id` = #{lotsId}")
+    int [] getLotresultUid(Integer lotsId);
+
+    //为uid这个用户的lots_id这次抽奖记录下开奖之后的抽奖结果Lotresult,记录prize_id
+    @Update("UPDATE `results` SET `prize_id`=#{prizeId} WHERE `lots_id` = #{lotsId} AND `uid` = #{uid}")
+    void updatePrizeId(Integer prizeId, Integer lotsId, Integer uid);
 
 
 }

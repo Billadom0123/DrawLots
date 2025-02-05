@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
+import java.util.Random;
 
 public class CreateLotsController {
 
@@ -23,11 +24,11 @@ public class CreateLotsController {
             @RequestParam("endTime") Timestamp endTime,
             @RequestParam("joinLimit") Integer joinLimit,
             @RequestParam("joinMethod") Integer joinMethod,
-            @RequestParam("joinedNumber") Integer joinedNumber,
+            //joinedNumber
             @RequestParam("choice") Integer choice,
             @RequestParam("randomRangeMin") Integer randomRangeMin,
             @RequestParam("randomRangeMax") Integer randomRangeMax,
-            @RequestParam("randomNumber") Integer randomNumber,
+            //randomNumber
             @RequestParam("textNotice") String textNotice,
             @RequestParam("imageNotice") String imageNotice) {
 
@@ -39,11 +40,15 @@ public class CreateLotsController {
         lots.setEndTime(endTime);
         lots.setJoinLimit(joinLimit);
         lots.setJoinMethod(joinMethod);
-        lots.setJoinedNumber(joinedNumber);
+        lots.setJoinedNumber(0);
         lots.setChoice(choice);
         lots.setRandomRangeMin(randomRangeMin);
         lots.setRandomRangeMax(randomRangeMax);
+
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(randomRangeMax - randomRangeMin + 1) + randomRangeMin;
         lots.setRandomNumber(randomNumber);
+
         lots.setTextNotice(textNotice);
         lots.setImageNotice(imageNotice);
 
