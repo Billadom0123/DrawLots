@@ -32,6 +32,7 @@ public class CreateLotsController {
         lots.setUid(uid);
         lots.setNickname(nickname);
         lots.setType(type);
+        lots.setStartTime(new Timestamp(System.currentTimeMillis()));
         lots.setEndTime(endTime);
         lots.setJoinLimit(joinLimit);
         lots.setJoinMethod(joinMethod);
@@ -42,6 +43,7 @@ public class CreateLotsController {
         lots.setRandomNumber(1);
         lots.setTextNotice(textNotice);
         lots.setImageNotice(imageNotice);
+        lots.setFinished(false);
         lotsMapper.addNewLots(lots);
         return Response.success(lots);
     }

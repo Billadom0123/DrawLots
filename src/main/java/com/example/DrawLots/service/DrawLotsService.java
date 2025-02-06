@@ -90,7 +90,7 @@ public class DrawLotsService {
         if (lots == null) {
             return Response.failure(500,"dont find any");
         }
-        if (lots.getJoinedNumber() >= lots.getJoinLimit()) {
+        if (lots.getJoinedNumber() == lots.getJoinLimit()) {
             return Response.failure(500,"lots is full");
         }
 
@@ -114,7 +114,7 @@ public class DrawLotsService {
         return Response.success("Successfully joined");
     }
 
-    public Response getLotsResult(Integer lotId) //为lotsId这次抽奖开奖，并获取开奖结果,这里是通用抽奖
+    public Response finishLots(Integer lotId) //为lotsId这次抽奖开奖，并获取开奖结果,这里是通用抽奖
     {
         Lots lots = lotsMapper.getLotsById(lotId);
 

@@ -26,6 +26,8 @@ public class SearchLotsService {
     LotresultMapper lotresultMapper;
     @Autowired
     PrizeMapper prizeMapper;
+    @Autowired
+    private DrawLotsService drawLotsService;
 
     public Response searchJoinedLots(Integer uid) {
         int[] JoinedLotsIds = lotresultMapper.getLotsIdbyUid(uid);
@@ -47,8 +49,8 @@ public class SearchLotsService {
         return Response.success(JSONObject.toJSONString(CreatedLotsJA));
     }
 
-    public Response searchLotsDetails(Integer sid) {
-        Lots lots = lotsMapper.getLotsById(sid);
+    public Response searchLotsDetails(Integer id) {//这里是lotId
+        Lots lots = lotsMapper.getLotsById(id);
 
         JSONObject LotsFullVO = new JSONObject();
 
@@ -93,6 +95,27 @@ public class SearchLotsService {
 
         LotsFullVO.put("info", infoVO);
 
+        //此时检测是否还没开奖，可能要执行开奖
+        if(!lots.isFinished())
+        {
+            //按时间开奖，到达抽奖截止时间了，停止抽奖
+            if (lots.getEndTime().getTime() <= System.currentTimeMillis() && lots.getType() == 1)
+            {
+                //开奖
+                Response response =drawLotsService.finishLots(id);
+
+            }
+
+            //按人数开奖，到达抽奖最大人数了，停止抽奖
+            if (lots.getJoinedNumber() >= lots.getJoinLimit() && lots.getType() == 2)
+            {
+                //开奖
+                Response response =drawLotsService.finishLots(id);
+            }
+
+            //开奖之后，标记抽奖状态为"true"，即已开奖
+            lotsMapper.updateIsFinished(id);
+        }
 
         List<Lotresult> Lotresults = lotresultMapper.getLotresults(lots.getId());
         List<LotresultVO> LotresultVOs = new ArrayList<>();

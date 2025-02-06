@@ -16,7 +16,7 @@ public class Lots {//已发布的抽奖
     private int uid;
     private String nickname;
 
-    private int type;//抽奖模式
+    private int type;//抽奖模式: 1、通用抽奖且按时间开奖。2、通用抽奖且按人数开奖。3、即开即抽
 
     private Timestamp startTime;
     private Timestamp endTime;
@@ -32,4 +32,7 @@ public class Lots {//已发布的抽奖
 
     private String textNotice;
     private String imageNotice;
+
+    private boolean isFinished;//是否已开奖
+
 }

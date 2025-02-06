@@ -21,11 +21,11 @@ public interface LotsMapper {
     @Insert("INSERT INTO `lots`(`uid`,`nickname`,`type`,`start_time`," +
             "`end_time`,`join_limit`,`join_method`,`joined_number`," +
             "`choice`,`random_range_min`,`random_range_max`," +
-            "`random_number`,`text_notice`,`image_notice`) " +
+            "`random_number`,`text_notice`,`image_notice`,`is_finished`) " +
             "VALUES(#{uid},#{nickname},#{type}),#{startTime}," +
             "#{endTime}),#{joinLimit},#{joinMethod}),#{joinedNumber}," +
             "#{choice}),#{randomRangeMin},#{randomRangeMax})," +
-            "#{randomNumber},#{textNotice},#{imageNotice})")
+            "#{randomNumber},#{textNotice},#{imageNotice},0)")
     void addNewLots(Lots lots);
 
     //查询数据库中发布的抽奖数量
@@ -35,6 +35,10 @@ public interface LotsMapper {
     //更新参与人数
     @Update("UPDATE `lots` SET `joined_number`=#{joinedNumber} WHERE `id` = #{lotsId}")
     void updateJoinedNumber(int joinedNumber,int lotsId);
+
+    //标记抽奖为已结束
+    @Update("UPDATE `lots` SET `is_finished`=1 WHERE `id`=#{id}")
+    void updateIsFinished(Integer id);
 
     //删除对应抽奖
     @Delete("DELETE FROM `lots` WHERE `id`=#{id}")
