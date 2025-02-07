@@ -50,4 +50,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8070
+  port: 8080
