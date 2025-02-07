@@ -18,7 +18,7 @@ public class QQLoginController
     public String getAuthUrl() {
         String clientId = "";  // 实际的client_id。即申请QQ登录成功后，分配给应用的appid。
         String redirectUri = "";  // 实际的redirect_uri
-        String state = "Web request remain stable";
+        String state = "Webrequestremainstable";
         String scope = "get_user_info";
         String display = "mobile";
         return qQLoginService.getAuthorizationCode(clientId, redirectUri, state, scope, display);
@@ -28,7 +28,7 @@ public class QQLoginController
     // 填写变量时，可参考上方注释部分。
     @GetMapping("/QQauth/login")
     public String loginByAuthUrl(@RequestParam String code, @RequestParam String state) {
-        if(state.equals("Web request remain stable")) {
+        if(state.equals("Webrequestremainstable")) {
             String clientId = "";  // 实际的client_id。即申请QQ登录成功后，分配给应用的appid。
             String clientSecret = "";//申请QQ登录成功后，分配给网站的appkey。
             String redirectUri = "";
