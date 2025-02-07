@@ -22,9 +22,9 @@ public interface LotsMapper {
             "`end_time`,`join_limit`,`join_method`,`joined_number`," +
             "`choice`,`random_range_min`,`random_range_max`," +
             "`random_number`,`text_notice`,`image_notice`,`is_finished`) " +
-            "VALUES(#{uid},#{nickname},#{type}),#{startTime}," +
-            "#{endTime}),#{joinLimit},#{joinMethod}),#{joinedNumber}," +
-            "#{choice}),#{randomRangeMin},#{randomRangeMax})," +
+            "VALUES(#{uid},#{nickname},#{type},#{startTime}," +
+            "#{endTime},#{joinLimit},#{joinMethod},#{joinedNumber}," +
+            "#{choice},#{randomRangeMin},#{randomRangeMax}," +
             "#{randomNumber},#{textNotice},#{imageNotice},0)")
     void addNewLots(Lots lots);
 
