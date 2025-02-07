@@ -16,16 +16,16 @@ public class DrawLotsController {
     private DrawLotsService drawLotsService;
 
     @GetMapping("/lots/info")
-    public Response getLotsInfo(@RequestParam("id") Integer id)
+    public Response getLotsInfo(@RequestParam("sid") Integer sid)
     {
-        return drawLotsService.getLotsInfo(id);
+        return drawLotsService.getLotsInfo(sid);
     }
 
     @PostMapping("/lots/join")
-    public Response joinLots(@RequestParam("id") Integer id,
+    public Response joinLots(@RequestParam("sid") Integer sid,
                              @RequestParam("uid") Integer uid)
     {
-        return drawLotsService.joinLots(id,uid);
+        return drawLotsService.joinLots(sid,uid);
     }
 
 }
