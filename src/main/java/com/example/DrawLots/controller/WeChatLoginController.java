@@ -18,7 +18,7 @@ public class WeChatLoginController
 
     //步骤1: 获取Authorization Code的URL
     //在微信登录中，这一步由前端完成。具体做法:
-    //前端生成二维码引入链接，或者让用户点击链接： https://open.weixin.qq.com/connect/qrconnect?appid=wxca3387499a3b8185&redirect_uri=http://drawlots.billadom.top/wxMpSendMsgCallBack&response_type=code&scope=snsapi_login&state=Web request remain stable#wechat_redirect
+    //前端生成二维码引入链接，或者让用户点击链接： https://open.weixin.qq.com/connect/qrconnect?appid=wxca3387499a3b8185&redirect_uri=http://drawlots.billadom.top/wxMpSendMsgCallBack&response_type=code&scope=snsapi_login&state=Webrequestremainstable#wechat_redirect
 
 
 
@@ -27,7 +27,7 @@ public class WeChatLoginController
     @GetMapping("/WeChatauth/login")
     public User loginByAuthUrl(@RequestParam String code, @RequestParam String state)
     {
-        if(state.equals("Web request remain stable"))
+        if(state.equals("Webrequestremainstable"))
         {
             return weChatLoginService.login(code);
         }
