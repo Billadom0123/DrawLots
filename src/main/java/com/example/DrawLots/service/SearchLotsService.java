@@ -88,10 +88,10 @@ public class SearchLotsService {
         JSONObject random = new JSONObject();
         random.put("range",JSONArray.parseArray(JSONObject.toJSONString(new int[]{lots.getRandomRangeMin(),lots.getRandomRangeMax()})));
         random.put("number",lots.getRandomNumber());
-
-        random.put("text_notice",lots.getTextNotice());
-        random.put("image_notice",lots.getImageNotice());
         infoVO.put("random", random);
+
+        infoVO.put("text_notice",lots.getTextNotice());
+        infoVO.put("image_notice",lots.getImageNotice());
 
         LotsFullVO.put("info", infoVO);
 

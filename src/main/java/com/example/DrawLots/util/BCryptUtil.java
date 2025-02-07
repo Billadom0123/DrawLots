@@ -13,6 +13,8 @@ public class BCryptUtil {
         return BCrypt.hashpw(plainText, BCrypt.gensalt());
     }
 
+    public static String encrypt(String plainText, String salt) { return BCrypt.hashpw(plainText, salt); }
+
     //解密密码
     @Deprecated
     public static String decrypt(String cipherText) {

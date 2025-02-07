@@ -6,15 +6,18 @@ import com.example.DrawLots.mapper.UserMapper;
 import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.po.Prize;
 import com.example.DrawLots.model.vo.Response;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.DrawLots.service.ShortLinkService;
+import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Random;
 
 @RestController
 public class CreateLotsController {
+
+    @Resource
+    ShortLinkService shortLinkService;
 
     private final LotsMapper lotsMapper;
     private final UserMapper userMapper;
@@ -60,5 +63,16 @@ public class CreateLotsController {
         }
 
         return Response.success(lots);
+    }
+
+    @GetMapping("/lots/glink")
+    public Response glink(@RequestParam("uid") Integer uid,
+                          @RequestParam("id") Integer id) {
+        return shortLinkService.genShortLink(uid, id);
+    }
+
+    @GetMapping("/{shortcode}")
+    public Response getLots(@PathVariable("shortcode") String shortcode) {
+        return shortLinkService.anaShortLink(shortcode);
     }
 }

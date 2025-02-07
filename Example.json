@@ -1,0 +1,75 @@
+//仅供展示结构使用qwq
+{
+  "id": 1,
+  "user": {
+    "uid": 2,
+    "nickname": "John"
+  },
+  "prize": [
+    {
+      "type": "一等奖",
+      "name": "小米su7",
+      "number": 1,
+      "picture": "https://www.xiaomiev.com/su7",
+      "description": "由小米公司生产的汽车哦awa"
+    },
+    {
+      "type": "二等奖",
+      "name": "小米13",
+      "number": 2,
+      "picture": "https://www.mi.com/xiaomi-13",
+      "description": "由小米和徕卡共同研发的新式手机！"
+    }
+  ],
+  "info": {
+    "type": 1,
+    "time": {
+      "start": 1738942165,
+      "end": 1739116800
+    },
+    "join": {
+      "number": 100,
+      "method": 2,
+      "joined": 5
+    },
+    "choice": 3,    //虽然好像不需要我们写
+    "random": {
+      "range": [1,24],
+      "method": 2
+    },
+    "text_notice": "为了回馈广大粉丝的支持，我们自费一些小米公司的产品抽给粉丝。",
+    "image_notice": "https://www.mi.com/"
+  },
+  "result": [
+    {
+      "uid": 101,
+      "nickname": "抽不到我不改名",
+      "time": 1738947894,
+      "prize": null
+    },
+    {
+      "uid": 46,
+      "nickname": "慈祥老奶奶",
+      "time": 1739012451,
+      "prize": "小米13"
+    },
+    {
+      "uid": 1251,
+      "nickname": "看到我请叫我滚去学习",
+      "time": 1739014568,
+      "prize": "小米su7"
+    },
+    {
+      "uid": 1053,
+      "nickname": "正经读书人-_-",
+      "time": 1739034820,
+      "prize": null
+    },
+    {
+      "uid": 26,
+      "nickname": "御坂14561号",
+      "time": 1739065173,
+      "prize": "小米13"
+    }
+  ]
+}
