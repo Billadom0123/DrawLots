@@ -1,6 +1,7 @@
 package com.example.DrawLots.controller;
 
 import com.example.DrawLots.mapper.LotsMapper;
+import com.example.DrawLots.mapper.UserMapper;
 import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.vo.Response;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,15 @@ import java.util.Random;
 public class CreateLotsController {
 
     private final LotsMapper lotsMapper;
-    public CreateLotsController(LotsMapper lotsMapper) {
+    private final UserMapper userMapper;
+
+    public CreateLotsController(LotsMapper lotsMapper, UserMapper userMapper) {
         this.lotsMapper = lotsMapper;
+        this.userMapper = userMapper;
     }
-    @PostMapping("/lots/create/typical")
+    @PostMapping("/lots/create")
     public Response createTypicalLots(
             @RequestParam("uid") Integer uid,
-            @RequestParam("nickname") String nickname,
             @RequestParam("type") Integer type,
             @RequestParam("endTime") Timestamp endTime,
             @RequestParam("joinLimit") Integer joinLimit,
@@ -30,7 +33,7 @@ public class CreateLotsController {
 
         Lots lots = new Lots();
         lots.setUid(uid);
-        lots.setNickname(nickname);
+        lots.setNickname(userMapper.getUserByUid(uid).getNickname());
         lots.setType(type);
         lots.setStartTime(new Timestamp(System.currentTimeMillis()));
         lots.setEndTime(endTime);
