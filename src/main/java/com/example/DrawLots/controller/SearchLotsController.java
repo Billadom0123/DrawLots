@@ -12,17 +12,17 @@ public class SearchLotsController {
     @Resource
     private SearchLotsService searchLotsService;
 
-    @GetMapping("/search/join")
+    @GetMapping("/lots/joined")
     public Response searchJoinedLots(@RequestParam("uid") Integer uid){
         return searchLotsService.searchJoinedLots(uid);
     }
 
-    @GetMapping("/search/create")
+    @GetMapping("/lots/created")
     public Response searchCreateLots(@RequestParam("uid") Integer uid){
         return searchLotsService.searchCreatedLots(uid);
     }
 
-    @GetMapping("/search/detail")
+    @GetMapping("/lots/detailedinfo")
     public Response searchLotsDetail(@RequestParam("id") Integer id){
         return searchLotsService.searchLotsDetails(id);
     }

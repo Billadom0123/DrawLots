@@ -1,8 +1,10 @@
 package com.example.DrawLots.controller;
 
 import com.example.DrawLots.mapper.LotsMapper;
+import com.example.DrawLots.mapper.PrizeMapper;
 import com.example.DrawLots.mapper.UserMapper;
 import com.example.DrawLots.model.po.Lots;
+import com.example.DrawLots.model.po.Prize;
 import com.example.DrawLots.model.vo.Response;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +18,12 @@ public class CreateLotsController {
 
     private final LotsMapper lotsMapper;
     private final UserMapper userMapper;
+    private final PrizeMapper prizeMapper;
 
-    public CreateLotsController(LotsMapper lotsMapper, UserMapper userMapper) {
+    public CreateLotsController(LotsMapper lotsMapper, UserMapper userMapper, PrizeMapper prizeMapper) {
         this.lotsMapper = lotsMapper;
         this.userMapper = userMapper;
+        this.prizeMapper = prizeMapper;
     }
     @PostMapping("/lots/create")
     public Response createTypicalLots(
@@ -29,7 +33,8 @@ public class CreateLotsController {
             @RequestParam("joinLimit") Integer joinLimit,
             @RequestParam("joinMethod") Integer joinMethod,
             @RequestParam("textNotice") String textNotice,
-            @RequestParam("imageNotice") String imageNotice) {
+            @RequestParam("imageNotice") String imageNotice,
+            @RequestParam("prize") Prize [] prize) {
 
         Lots lots = new Lots();
         lots.setUid(uid);
@@ -48,6 +53,12 @@ public class CreateLotsController {
         lots.setImageNotice(imageNotice);
         lots.setFinished(false);
         lotsMapper.addNewLots(lots);
+
+        for(Prize p:prize)
+        {
+            prizeMapper.addNewPrize(p);
+        }
+
         return Response.success(lots);
     }
 }
