@@ -22,9 +22,9 @@ spring:
     # mysql服务地址 格式：jdbc:mysql://{mysql服务所在IP地址}:{mysql服务所在端口}/{数据库名称}?{一些参数}
     url: jdbc:mysql://127.0.0.1:3306/drawlots?useUnicode=true&characterEncoding=utf-8&useSSL=true&jdbcCompliantTruncation=false&allowMultiQueries=true
     # 使用的用户名
-    username: drawlots
+    username: root
     # 用户名对应的密码
-    password: 123654798
+    password: 123456
   jackson:
     #日期格式化
     date-format: yyyy-MM-dd HH:mm:ss
@@ -50,4 +50,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8070
+  port: 8080

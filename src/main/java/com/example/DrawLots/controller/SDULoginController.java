@@ -2,6 +2,7 @@ package com.example.DrawLots.controller;
 
 import com.example.DrawLots.model.po.User;
 import com.example.DrawLots.service.SDULoginService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

@@ -8,8 +8,10 @@ import com.example.DrawLots.model.po.Prize;
 import com.example.DrawLots.model.vo.Response;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.example.DrawLots.service.ShortLinkService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Random;
@@ -20,11 +22,13 @@ public class CreateLotsController {
     private final LotsMapper lotsMapper;
     private final UserMapper userMapper;
     private final PrizeMapper prizeMapper;
+    private final ShortLinkService shortLinkService;
 
-    public CreateLotsController(LotsMapper lotsMapper, UserMapper userMapper, PrizeMapper prizeMapper) {
+    public CreateLotsController(LotsMapper lotsMapper, UserMapper userMapper, PrizeMapper prizeMapper,ShortLinkService shortLinkService) {
         this.lotsMapper = lotsMapper;
         this.userMapper = userMapper;
         this.prizeMapper = prizeMapper;
+        this.ShortLinkService = shortLinkService;
     }
     @PostMapping("/lots/create")
     public Response createTypicalLots(
@@ -64,5 +68,16 @@ public class CreateLotsController {
         }
 
         return Response.success(lotsMapper.getLotsById(id));
+    }
+
+    @GetMapping("/lots/glink")
+    public Response glink(@RequestParam("uid") Integer uid,
+                          @RequestParam("id") Integer id) {
+        return shortLinkService.genShortLink(uid, id);
+    }
+
+    @GetMapping("/{shortcode}")
+    public Response getLots(@PathVariable("shortcode") String shortcode) {
+        return shortLinkService.anaShortLink(shortcode);
     }
 }
