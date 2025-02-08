@@ -11,9 +11,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Prize {
 
-    private int id;
+    private Integer id;
 
-    private int lotsId;
+    private Integer lotsId;
 
     private String type;//奖项
 

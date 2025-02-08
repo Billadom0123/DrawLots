@@ -7,6 +7,7 @@ import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.po.Prize;
 import com.example.DrawLots.model.vo.Response;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,13 +35,14 @@ public class CreateLotsController {
             @RequestParam("joinMethod") Integer joinMethod,
             @RequestParam("textNotice") String textNotice,
             @RequestParam("imageNotice") String imageNotice,
-            @RequestParam("prize") Prize [] prize) {
+            @RequestBody Prize [] prize) {
 
         Lots lots = new Lots();
         lots.setUid(uid);
         lots.setNickname(userMapper.getUserByUid(uid).getNickname());
         lots.setType(type);
-        lots.setStartTime(new Timestamp(System.currentTimeMillis()));
+        Timestamp startTime = new Timestamp(System.currentTimeMillis());
+        lots.setStartTime(startTime);
         lots.setEndTime(endTime);
         lots.setJoinLimit(joinLimit);
         lots.setJoinMethod(joinMethod);
@@ -54,11 +56,13 @@ public class CreateLotsController {
         lots.setFinished(false);
         lotsMapper.addNewLots(lots);
 
+        Integer id = lotsMapper.getLotsIdByStartTimeAndUid(startTime,uid);
         for(Prize p:prize)
         {
+            p.setLotsId(id);
             prizeMapper.addNewPrize(p);
         }
 
-        return Response.success(lots);
+        return Response.success(lotsMapper.getLotsById(id));
     }
 }
