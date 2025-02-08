@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserMapper {
 
     //新增一条sdu_user记录
-    @Insert("INSERT INTO `user`(`sid`,`name`,`password`) VALUES(#{sid},#{name},#{password})")
+    @Insert("INSERT INTO `user`(`sid`,`name`,`nickname`,`password`) VALUES(#{sid},#{name},#{nickname},#{password})")
     void addNewSDUUser(User user);
 
     //新增一条qq_user记录

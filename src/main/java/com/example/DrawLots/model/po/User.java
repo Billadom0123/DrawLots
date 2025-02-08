@@ -26,7 +26,7 @@ public class User {
         this.sid = sid;
         this.name = name;
         this.password = password;
-        nickname = "u_" + sid;
+        this.nickname = "u_" + sid;
     }
 
     public User(String nickname,String face)//QQ或WeChat用户
