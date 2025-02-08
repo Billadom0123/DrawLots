@@ -28,7 +28,7 @@ public class CreateLotsController {
         this.lotsMapper = lotsMapper;
         this.userMapper = userMapper;
         this.prizeMapper = prizeMapper;
-        this.ShortLinkService = shortLinkService;
+        this.shortLinkService = shortLinkService;
     }
     @PostMapping("/lots/create")
     public Response createTypicalLots(
