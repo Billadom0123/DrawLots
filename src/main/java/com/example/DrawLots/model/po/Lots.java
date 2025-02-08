@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Lots {//已发布的抽奖
-    private int id;
+    private Integer id;
     private int uid;
     private String nickname;
 

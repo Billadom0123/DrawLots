@@ -4,6 +4,7 @@ import com.example.DrawLots.model.po.Lots;
 import com.example.DrawLots.model.po.User;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -27,6 +28,10 @@ public interface LotsMapper {
             "#{choice},#{randomRangeMin},#{randomRangeMax}," +
             "#{randomNumber},#{textNotice},#{imageNotice},0)")
     void addNewLots(Lots lots);
+
+    //按照startTime和uid查询lots的id
+    @Select("SELECT `id` FROM `lots` WHERE `start_time` = #{startTime} AND `uid` = #{uid}")
+    Integer getLotsIdByStartTimeAndUid(Timestamp startTime, Integer uid);
 
     //查询数据库中发布的抽奖数量
     @Select("SELECT COUNT(1) FROM `lots`")
