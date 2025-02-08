@@ -20,6 +20,7 @@ public class MethodImplement implements SDULoginBO.Method
     @Override
     public User register(User newUser)
     {
+        newUser.setNickname(newUser.getName());
         userMapper.addNewSDUUser(newUser);
         return userMapper.getUserBySid(newUser.getSid());
     }

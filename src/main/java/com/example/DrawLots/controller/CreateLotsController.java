@@ -1,5 +1,8 @@
 package com.example.DrawLots.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.DrawLots.mapper.LotsMapper;
 import com.example.DrawLots.mapper.PrizeMapper;
 import com.example.DrawLots.mapper.UserMapper;
@@ -32,22 +35,23 @@ public class CreateLotsController {
     }
     @PostMapping("/lots/create")
     public Response createTypicalLots(
-            @RequestParam("uid") Integer uid,
-            @RequestParam("type") Integer type,
-            @RequestParam("endTime") Timestamp endTime,
-            @RequestParam("joinLimit") Integer joinLimit,
-            @RequestParam("joinMethod") Integer joinMethod,
-            @RequestParam("textNotice") String textNotice,
-            @RequestParam("imageNotice") String imageNotice,
-            @RequestBody Prize [] prize) {
+            @RequestParam(value = "uid") Integer uid,
+            @RequestParam(value = "type") Integer type,
+            @RequestParam(value = "endTime") String endTime,
+            @RequestParam(value = "joinLimit") Integer joinLimit,
+            @RequestParam(value = "joinMethod") Integer joinMethod,
+            @RequestParam(value = "textNotice") String textNotice,
+            @RequestParam(value = "imageNotice") String imageNotice,
+            @RequestParam(value = "prize") String prize) {
 
         Lots lots = new Lots();
         lots.setUid(uid);
         lots.setNickname(userMapper.getUserByUid(uid).getNickname());
         lots.setType(type);
         Timestamp startTime = new Timestamp(System.currentTimeMillis());
+        startTime.setNanos(0);
         lots.setStartTime(startTime);
-        lots.setEndTime(endTime);
+        lots.setEndTime(new Timestamp(Long.parseLong(endTime)));
         lots.setJoinLimit(joinLimit);
         lots.setJoinMethod(joinMethod);
         lots.setJoinedNumber(0);
@@ -59,15 +63,24 @@ public class CreateLotsController {
         lots.setImageNotice(imageNotice);
         lots.setFinished(false);
         lotsMapper.addNewLots(lots);
-
+        System.out.println(startTime);
         Integer id = lotsMapper.getLotsIdByStartTimeAndUid(startTime,uid);
-        for(Prize p:prize)
+        JSONArray ja = JSONArray.parseArray(prize);
+
+        for(int i = 0;i < ja.size();i++)
         {
+            JSONObject jo = ja.getJSONObject(i);
+            Prize p = new Prize();
             p.setLotsId(id);
+            p.setType(jo.getString("type"));
+            p.setName(jo.getString("name"));
+            p.setNumber(jo.getInteger("number"));
+            p.setPictureUrl(jo.getString("picture"));
+            p.setDescription(jo.getString("description"));
             prizeMapper.addNewPrize(p);
         }
 
-        return Response.success(lotsMapper.getLotsById(id));
+        return Response.success("抽奖id："+id);
     }
 
     @GetMapping("/lots/glink")
