@@ -6,7 +6,7 @@ import lombok.Getter;
 //为了实现json形式的数据返回
 @Getter
 public class PrizeVO {
-    private String type;
+    private Integer type;
     private String name;
     private int number;
     private String picture;

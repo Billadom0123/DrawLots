@@ -72,7 +72,7 @@ public class CreateLotsController {
             JSONObject jo = ja.getJSONObject(i);
             Prize p = new Prize();
             p.setLotsId(id);
-            p.setType(jo.getString("type"));
+            p.setType(jo.getInteger("type"));
             p.setName(jo.getString("name"));
             p.setNumber(jo.getInteger("number"));
             p.setPictureUrl(jo.getString("picture"));

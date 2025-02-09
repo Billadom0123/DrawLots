@@ -15,7 +15,7 @@ public class Prize {
 
     private Integer lotsId;
 
-    private String type;//奖项
+    private Integer type;//奖项
 
     private String name;
 

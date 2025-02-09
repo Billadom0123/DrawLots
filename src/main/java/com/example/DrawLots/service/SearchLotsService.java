@@ -117,9 +117,10 @@ public class SearchLotsService {
             lotsMapper.updateIsFinished(id);
         }
 
-        List<Lotresult> Lotresults = lotresultMapper.getLotresults(lots.getId());
+        List<Lotresult> Lotresults = lotresultMapper.getLotresults(id);
         List<LotresultVO> LotresultVOs = new ArrayList<>();
         for (Lotresult lotresult : Lotresults) {
+            lotresult.setPrize(prizeMapper.getPrizeByLotsIdAndType(id, lotresult.getPrizeId()));
             LotresultVOs.add(new LotresultVO(lotresult));
         }
         JSONArray LotresultJA = JSONArray.parseArray(JSONObject.toJSONString(LotresultVOs));

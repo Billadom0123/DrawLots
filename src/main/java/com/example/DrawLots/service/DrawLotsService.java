@@ -140,8 +140,7 @@ public class DrawLotsService {
         //设置uid序号列，打乱，然后与各个奖项配对
         int [] uidList = lotresultMapper.getLotresultUid(lotId);
 
-        for(int i=0;i<lots.getJoinedNumber();i++)//打乱顺序。为了防止人数不匹配，要用错误检测
-        {
+        //打乱顺序。
             try
             {
                 ArrayUtils.shuffleArray(uidList);
@@ -150,7 +149,6 @@ public class DrawLotsService {
             {
                 return Response.failure(500,"error");
             }
-        }
 
         for(int i=0;i<lots.getJoinedNumber();i++)
         {
