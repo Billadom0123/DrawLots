@@ -8,6 +8,7 @@ public class Lotresult {//已开奖的抽奖结果
     private String nickname;
     private Timestamp time;
     private Prize prize;
+    private Integer prizeId;//这里的prizeId其实对应的是是几等奖,也就是prize表中的type。不是奖品的id。
 
     // Getter 和 Setter 方法
 
@@ -59,5 +60,15 @@ public class Lotresult {//已开奖的抽奖结果
     public void setPrize(Prize prize)
     {
         this.prize = prize;
+    }
+
+    public Integer getPrizeId()
+    {
+        return prizeId;
+    }
+
+    public void setPrizeId(Integer prizeId)
+    {
+        this.prizeId = prizeId;
     }
 }
