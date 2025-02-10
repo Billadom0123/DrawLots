@@ -16,6 +16,11 @@ public class LotresultVO {
         this.uid = lotresult.getUid();
         this.nickname = lotresult.getNickname();
         this.time = lotresult.getTime();
-        this.prize = lotresult.getPrize().getName();
+        if (lotresult.getPrize() != null) {
+            this.prize = lotresult.getPrize().getName();
+        } else {
+            this.prize = "";
+        }
+
     }
 }
