@@ -80,7 +80,7 @@ public class CreateLotsController {
             prizeMapper.addNewPrize(p);
         }
 
-        return Response.success("抽奖id："+id);
+        return Response.success(id);
     }
 
     @GetMapping("/lots/glink")
