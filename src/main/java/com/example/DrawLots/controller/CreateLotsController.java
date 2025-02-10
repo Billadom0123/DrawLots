@@ -63,7 +63,6 @@ public class CreateLotsController {
         lots.setImageNotice(imageNotice);
         lots.setFinished(false);
         lotsMapper.addNewLots(lots);
-        System.out.println(startTime);
         Integer id = lotsMapper.getLotsIdByStartTimeAndUid(startTime,uid);
         JSONArray ja = JSONArray.parseArray(prize);
 
@@ -72,7 +71,7 @@ public class CreateLotsController {
             JSONObject jo = ja.getJSONObject(i);
             Prize p = new Prize();
             p.setLotsId(id);
-            p.setType(jo.getInteger("type"));
+            p.setType(jo.getString("type"));
             p.setName(jo.getString("name"));
             p.setNumber(jo.getInteger("number"));
             p.setPictureUrl(jo.getString("picture"));
@@ -80,7 +79,7 @@ public class CreateLotsController {
             prizeMapper.addNewPrize(p);
         }
 
-        return Response.success("抽奖id："+id);
+        return Response.success(id);
     }
 
     @GetMapping("/lots/glink")
