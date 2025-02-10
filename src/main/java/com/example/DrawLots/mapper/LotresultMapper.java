@@ -35,5 +35,7 @@ public interface LotresultMapper
     @Select("SELECT `lots_id` FROM `results` WHERE `uid` = #{uid}")
     int [] getLotsIdbyUid(Integer uid);
 
+    @Select("SELECT COUNT(*) FROM `results` WHERE `lots_id` = #{lotsId} AND `uid` = #{uid}")
+    int checkIfRecordExists(Integer lotsId, Integer uid);
 
 }
