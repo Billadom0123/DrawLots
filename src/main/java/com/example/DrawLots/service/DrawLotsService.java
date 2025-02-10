@@ -94,6 +94,12 @@ public class DrawLotsService {
             return Response.failure(500,"lots is full");
         }
 
+        //不能重复加入抽奖
+        int count = lotresultMapper.checkIfRecordExists(id,uid);
+        if(count>0){
+            return Response.failure(500,"You have already joined");
+        }
+
         Lotresult lotresult = new Lotresult();
 
         lotresult.setLotsId(id);
