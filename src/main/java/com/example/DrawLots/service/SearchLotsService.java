@@ -122,7 +122,7 @@ public class SearchLotsService {
         for (Lotresult lotresult : Lotresults) {
             LotresultVO lotresultVO = new LotresultVO(lotresult);
             if(lotresult.getPrizeId() != 0) {
-                lotresultVO.setPrize(prizeMapper.getPrizeByLotsIdAndType(id, lotresult.getPrizeId()).getName());
+                lotresultVO.setPrize(prizeMapper.getPrizeById(lotresult.getPrizeId()).getName());
             } else { lotresultVO.setPrize("");}
             LotresultVOs.add(lotresultVO);
         }

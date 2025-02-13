@@ -134,18 +134,17 @@ public class DrawLotsService {
             prizeList[i] = 0;
         }
 
-        for(int i=0;i<lots.getJoinedNumber();i++)//设置奖项序号列，0表示未中奖
-        {
+        int index = 0;
 
-            for(int j=1;j<=prizeMapper.getPrizeTypes(lotId);j++)
-            {
-                for(int k=0;k<prizeMapper.getPrizeNumber(lotId,j);k++)
-                {
-                    prizeList[i] = j;
-                }
+        for(int prizeId :prizeMapper.getPrizeIds(lotId)) {
+            for(int j = 0; j < prizeMapper.getPrizeNumber(prizeId); j++) {
+                prizeList[index] = prizeId;
+                index++;
+                if(index >= prizeList.length) { break; }
             }
-
+            if(index >= prizeList.length) { break; }
         }
+
         //设置uid序号列，打乱，然后与各个奖项配对
         int [] uidList = lotresultMapper.getLotresultUid(lotId);
 
