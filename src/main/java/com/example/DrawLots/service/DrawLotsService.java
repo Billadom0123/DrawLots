@@ -90,6 +90,9 @@ public class DrawLotsService {
         if (lots == null) {
             return Response.failure(500,"dont find any");
         }
+        if (new Timestamp(System.currentTimeMillis()).compareTo(lots.getEndTime()) >= 0) {
+            return Response.failure(500,"time's up.");
+        }
         if (lots.getJoinedNumber() == lots.getJoinLimit()) {
             return Response.failure(500,"lots is full");
         }
