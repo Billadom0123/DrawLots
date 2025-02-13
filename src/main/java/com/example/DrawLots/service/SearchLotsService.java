@@ -120,8 +120,9 @@ public class SearchLotsService {
         List<Lotresult> Lotresults = lotresultMapper.getLotresults(id);
         List<LotresultVO> LotresultVOs = new ArrayList<>();
         for (Lotresult lotresult : Lotresults) {
-            lotresult.setPrize(prizeMapper.getPrizeByLotsIdAndType(id, lotresult.getPrizeId()));
-            LotresultVOs.add(new LotresultVO(lotresult));
+            LotresultVO lotresultVO = new LotresultVO(lotresult);
+            lotresultVO.setPrize(prizeMapper.getPrizeByLotsIdAndType(id, lotresult.getPrizeId()).getName());
+            LotresultVOs.add(lotresultVO);
         }
         JSONArray LotresultJA = JSONArray.parseArray(JSONObject.toJSONString(LotresultVOs));
         LotsFullVO.put("results", LotresultJA);

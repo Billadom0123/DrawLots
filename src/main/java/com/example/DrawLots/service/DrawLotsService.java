@@ -106,7 +106,7 @@ public class DrawLotsService {
         lotresult.setUid(uid);
         lotresult.setNickname(userMapper.getUserByUid(uid).getNickname());
         lotresult.setTime(new Timestamp(System.currentTimeMillis()));
-        lotresult.setPrize(null);
+        lotresult.setPrizeId(0);
         lotresultMapper.addNewLotresult(lotresult);//成功加入此次抽奖
 
         lots.setJoinedNumber(lots.getJoinedNumber() + 1);

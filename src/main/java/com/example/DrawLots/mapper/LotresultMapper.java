@@ -15,7 +15,7 @@ public interface LotresultMapper
 
 
     //为uid这个用户的lots_id这次抽奖记录下抽奖结果Lotresult,注意此时并没有开奖,设置prize_id为0
-    @Insert("INSERT INTO `results`(`lots_id`,`uid`,`nickname`,`join_time`,`prize_id`) VALUES(#{lotsId},#{uid},#{nickname},#{time},0)")
+    @Insert("INSERT INTO `results`(`lots_id`,`uid`,`nickname`,`time`,`prize_id`) VALUES(#{lotsId},#{uid},#{nickname},#{time},0)")
     void addNewLotresult(Lotresult lotresult);
 
     //返回所有参与了这次抽奖的结果
